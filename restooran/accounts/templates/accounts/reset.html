@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block body %}
+<form method="post">
+    {% csrf_token %}
+    <div style="border-radius: 5px; width:230px;margin-left: 500px ; margin-top:20px;margin-bottom: 100px;background-color: dimgrey;padding:20px" class="form"> <form method='post' novalidate> 
+            <input style="border-radius:5px; background-color:burlywood; padding:3px" type="email" name="email" autocomplete="email" maxlength="254" required="" placeholder="enter your email" id="id_email"> <br><br>
+            <button type="submit" class="btn btn-danger" style="height: 29px; padding:1.5px;" >send email</button>
+            </div>
+    
+</form>
+
+{% endblock body %}

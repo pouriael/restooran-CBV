@@ -1,0 +1,19 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<script src="[ link to jquery.js goes here ]"></script>
+{{form.media}}
+{% endblock head %}
+    
+{% block body%} 
+<h1>address Page</h1>
+<div style="border-radius: 5px; width:230px;margin-left: 500px ; margin-top:20px;margin-bottom: 100px;background-color: dimgrey;padding:20px" class="form"> 
+    <form method='post' > 
+    {% csrf_token %}
+        {{form.as_p}}
+    <button type="submit" class="btn btn-danger" style="height: 29px; padding:1.5px;" > address</button>
+    </form>
+ </div>
+
+   
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title%}
+    profile
+{% endblock title%}
+{% block body %}
+    <div style="height:500px;margin-top:30px;margin-left:-10px" class="container">
+        <div style="float:left; padding-right:200px">
+            {% if Profile.profile_image %}
+            <img  src="{{ Profile.profile_image.url }}" alt="" style="width:200px ; height:200px; border-radius:50%;border-style: solid;border-width: 3px;border-color: rgb(66, 64, 64);"><br><br>
+        {% endif %}
+            <button type="submit" class="btn btn" style="background-color:#60bd65; padding-top:20px;height: 40px;width:200px; padding:1.5px;border-style: solid;border-width: 3px;border-color: rgb(66, 64, 64);" ><a style="text-decoration:none;color:rgb(36, 34, 34);" href="{% url 'accounts:update' %}"> update </a> </button> <br><br>
+            <button type="submit" class="btn btn" style="background-color:#60bd65; padding-top:20px;height: 40px;width:200px; padding:1.5px;border-style: solid;border-width: 3px;border-color: rgb(66, 64, 64);" ><a style="text-decoration:none;color:rgb(36, 34, 34);" href="{% url 'accounts:change_password' %}"> change password </a> </button><br><br>
+            <button type="submit" class="btn btn" style="background-color:#60bd65; padding-top:20px;height: 40px;width:200px; padding:1.5px;border-style: solid;border-width: 3px;border-color: rgb(66, 64, 64);" ><a style="text-decoration:none;color:rgb(36, 34, 34);" href="{% url 'accounts:address' %}"> address</a> </button><br><br>
+            <button type="submit" class="btn btn" style="background-color:#60bd65; padding-top:20px;height: 40px;width:200px; padding:1.5px;border-style: solid;border-width: 3px;border-color: rgb(66, 64, 64);" ><a style="text-decoration:none;color:rgb(36, 34, 34);" href="{% url 'accounts:coupon' request.user.id %}"> coupon</a> </button><br><br>
+            <button type="submit" class="btn btn" style="background-color:#60bd65; padding-top:20px;height: 40px;width:200px; padding:1.5px;border-style: solid;border-width: 3px;border-color: rgb(66, 64, 64);" ><a style="text-decoration:none;color:rgb(36, 34, 34);" href="{% url 'accounts:favourite' %}"> favourite</a> </button><br><br>
+        </div>
+        <div style="float:left;padding-right:100px;background-color: rgb(47, 46, 46); padding:10px;border-radius: 5px;padding-top:10px">
+                 <button type="text" class="btn btn-danger" style="width:80px; height: 40px; padding:1.5px;" >email</button> <button type="submit" class="btn btn" style="background-color:#00000042; padding-top:20px;height: 40px;width:200px; padding:1.5px;color:aliceblue;" > {{Profile.user.email}} </button> <br><br>
+                 <button type="text" class="btn btn-danger" style="width:80px; height: 40px; padding:1.5px;" >first name</button> <button type="submit" class="btn btn" style="background-color:#00000042; padding-top:20px;height: 40px;width:200px; padding:1.5px;color:aliceblue;" > {{Profile.user.first_name}} </button> <br><br>
+                 <button type="text" class="btn btn-danger" style="width:80px; height: 40px; padding:1.5px;" >last name</button> <button type="submit" class="btn btn" style="background-color:#00000042; padding-top:20px;height: 40px;width:200px; padding:1.5px;color:aliceblue;" > {{Profile.user.last_name}} </button> <br><br>
+                 <button type="text" class="btn btn-danger" style="width:80px; height: 40px; padding:1.5px;" >phone</button> <button type="submit" class="btn btn" style="background-color:#00000042; padding-top:20px;height: 40px;width:200px; padding:1.5px;color:aliceblue;" > {{Profile.phone}} </button> <br><br>
+                 <button type="text" class="btn btn-danger" style="width:80px; height: 40px; padding:1.5px;" >address</button> <button type="submit" class="btn btn" style="background-color:#00000042; padding-top:20px;height: 40px;width:200px; padding:1.5px;color:aliceblue;" > {{Profile.address}} </button> <br><br>
+                 
+        </div>
+        <div>
+           
+        </div>
+    
+    </div>
+{% endblock body %}
+
+
+    {% if Profile.profile_image %}
+        <img src="{{ Profile.profile_image.url }}" alt="" style="width:300px ; height:200px">
+    {% endif %}

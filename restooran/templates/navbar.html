@@ -1,0 +1,40 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'navbar.css'%}">
+<div class="nav">
+  <div class="container" >
+    <ul style="margin-left:-80px;">
+      <li><a href="{% url "home:home"%}">home</a></li>
+      <li><a href="{% url "home:product"%}">product</a></li>
+      <li><a href="{% url "home:contact"%}">contact us</a></li>
+      <li><a href="{% url "home:aboutus"%}">about us</a></li>
+      <li><a href="{% url "blog:blog"%}">blog</a></li>
+      <li>Category
+        <ul>
+          {% for cat in category %}
+            <li><a href="{{cat.get_absolute_url}}"> {{cat.name}}</a>
+              <ul>
+                {% for data in cat.sub.all  %}
+                  <li><a href="{{data.get_absolute_url}}"> {{data.name}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% if  user.is_authenticated %}
+        <li><a href="{% url "accounts:logout"%}">logout</a></li>
+        <li><a href="{% url "accounts:profile"%}">profile</a></li>
+        <li><a href="{% url "cart:cart_detail"%}">cart</a></li>
+      {% else %}
+      <li><a href="{% url "accounts:login"%}">login</a></li>
+      <li><a href="{% url "accounts:register"%}">register</a></li>
+      {% endif %}
+    </ul>
+    
+    <form class="form-inline float-sm-right" action="{% url 'home:product' %}">
+      {% csrf_token %}
+      <input type="search" name="search" class="form-control" placeholder="Search" style="margin-top: -11px; margin-right: -50px;">
+      <input type="submit" value="Search" class="btn btn-success" style="margin-top: -11px; margin-right:-70px;margin-left:40px" >
+  </form>
+  </div>
+</div>

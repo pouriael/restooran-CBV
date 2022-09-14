@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block body %}
+    {% if validlink %}
+    <div style="border-radius: 5px; width:230px;margin-left: 500px ; margin-top:20px;margin-bottom: 100px;background-color: dimgrey;padding:20px" class="form">
+        <form method="post" action="">
+        {% csrf_token %}
+        <input style="border-radius:5px; background-color:burlywood; padding:3px" type="password" name="new_password1" placeholder="enter your new password" autocomplete="new_password" maxlength="50" required="" id="id_new_password1"><br><br>
+        <input style="border-radius:5px; background-color:burlywood; padding:3px" type="password" name="new_password2" placeholder="enter your new password again" autocomplete="new_password" maxlength="50" required="" id="id_new_password2"> <br><br>
+        <button type="submit" class="btn btn-danger" style="height: 29px; padding:1.5px;" > change</button>
+    </form>
+    </div>
+    {% endif %}
+{% endblock body %}

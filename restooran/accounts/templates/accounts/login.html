@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title%} login {% endblock title%}
+
+{% block body %} 
+<h1>LOGIN PAGE</h1>
+    {% csrf_token %}
+    <div style="border-radius: 5px; width:230px;margin-left: 500px ; margin-top:20px;margin-bottom: 100px;background-color: dimgrey;padding:20px" class="form"> <form method='post' > 
+        {% csrf_token %}
+            
+            <input style="border-radius:5px; background-color:burlywood; padding:3px" type="text" name="user" placeholder="enter your username" maxlength="50" required="" id="id_user"> <br><br>
+            <input style="border-radius:5px; background-color:burlywood; padding:3px" type="password" name="password" placeholder="enter your password" maxlength="20" required="" id="id_password"><br> <br>
+            <button type="submit" class="btn btn-info" style="height: 29px; padding:1.5px;" ><a style="color:rgb(54, 50, 50);text-decoration:none;" href="{%url 'accounts:login_phone' %}">login with phone</a> </button><br> <br>
+            <span style="color:aliceblue"> Remember me</span>
+            <input style="border-radius:5px; background-color:burlywood; padding:3px" type="checkbox" name="remember"  id="id_remember"><br>
+            <a href="{%url 'accounts:reset' %}">forget password</a> <br> <br>
+            <a href="{%url 'accounts:register' %}">register</a> <br> <br>
+            <button type="submit" class="btn btn-danger" style="height: 29px; padding:1.5px;" > login</button>
+            </div>
+    
+</form>
+
+
+
+{% endblock body %}

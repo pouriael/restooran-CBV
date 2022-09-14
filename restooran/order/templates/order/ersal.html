@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div style="margin-left:400px ;" class="row">
+    <form method="post" action="{% url "order:order_edit" order_id%}">
+        {% csrf_token %}
+        <div class="card" style="padding:30px; background-color:rgb(62, 58, 59)">
+            {{form.as_p}}
+            
+           
+        </div>
+        <br>
+        <button style="margin-left:100px" type="submit" class="btn btn-outline-danger">order</button> <br> <br>
+    </form>
+</div>
+{{asl}}
+{% endblock body %}
+    

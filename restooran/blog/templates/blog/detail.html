@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load jformat %}
+
+{% block body %}
+<div class="blog-area pb-60">
+    <div class="container">
+        <div style="margin-top: 10px; " class="row">
+            <div style="border-radius: 5px; margin-left: -60px; background-color:#fff" class="col-lg-8">
+                <div>
+                    <img src="{{blog.image.url}}" style="border-radius:5px; margin-left: -15px; width:760px;height:400px;" alt="">
+                </div>
+                <div>
+                    <h3>{{blog.name}}</h3>
+                </div>
+                   <div>
+                    <span><i style="color:green" class="fas fa-calendar"></i>{{blog.create|jformat:' %d %B %Y '}}</span>&nbsp;
+                    <span><i style="color:red" class="fas fa-eye"> </i> {{views}}</span>
+                   </div> 
+                    
+                    <p>{{blog.text|safe}}</p>
+                    
+            </div>
+            <div  style=" border-radius: 5px; margin-left:60px; background-color:#fff" class="col-lg-4">
+                
+
+                <div style="background-color:#333; width:380px;margin-left:-15px;height:45px;margin-top: 20px;margin-bottom: 20px;" >
+                    <button type="submit" class="btn btn-success" style="height: 30px; padding:1.5px; width:200px;text-align: center;margin-top: 7px;margin-left:90px;" >مقالات جدید</button>
+                </div>
+                    {% for i in create %}
+                    <div style="text-align: right;">
+                        <div style="display:inline;height:35px">
+                            <span>{{i.name}}</span>
+                        </div>
+                        <div style="display:inline;">
+                            <a href="{% url "blog:detail" i.id %}"> <img style="border-radius:8px;width:80px;height:80px" class="img" src="{{i.image.url}}"> </a>
+                        </div>
+                        <br>
+                        <div style="display:inline;height:35px">
+                            <span><i style="color:green" class="fas fa-calendar"></i>{{i.create|jformat:' %d %B %Y '}}</span>&nbsp;
+                    <span><i style="color:red" class="fas fa-eye"> </i> {{i.total_asli}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    {% endfor %}
+                    
+                    <div style="background-color:#333; width:380px;margin-left:-15px;height:45px;margin-top: 20px;margin-bottom: 20px;" >
+                        <button type="submit" class="btn btn-success" style="height: 30px; padding:1.5px; width:200px;text-align: center;margin-top: 7px;margin-left:90px;" >مقالات پر بازدید</button>
+                    </div>
+                    
+                    {% for i in bazdid %}
+                    <div style="text-align: right;">
+                        <div style="display:inline;height:35px">
+                            <span>{{i.name}}</span>
+                        </div>
+                        <div style="display:inline;">
+                            <a href="{% url "blog:detail" i.id %}"> <img style="border-radius:8px;width:80px;height:80px" class="img" src="{{i.image.url}}"> </a>
+                        </div>
+                        <br>
+                        <div style="display:inline;height:35px">
+                            <span><i style="color:green" class="fas fa-calendar"></i>{{i.create|jformat:' %d %B %Y '}}</span>&nbsp;
+                    <span><i style="color:red" class="fas fa-eye"> </i> {{i.total_asli}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    {% endfor %}
+                    
+                    <div style="background-color:#333; width:380px;margin-left:-15px;height:45px;margin-top: 20px;margin-bottom: 20px;" >
+                        <button type="submit" class="btn btn-success" style="height: 30px; padding:1.5px; width:200px;text-align: center;margin-top: 7px;margin-left:90px;" >دسته ها</button>
+                    </div>
+                    {% for i in tag %}
+                    <a href="{% url 'blog:dastebandi' i.id %}">
+                        <button type="submit" class="btn btn-info" style="height: 40px; padding:1.5px; width:80px;" >{{i}}</button>
+                    </a>
+                    
+                    {% endfor %}
+                    <hr>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+
+    
+</div>
+<hr style="color:#28a745">
+<h5 style="color:#28a745;text-align:center"> مقالات مشابه </h5>
+<div style="margin-top:20px; " class="container-fluid">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">    
+{% for i in similar %}
+<div class="swiper-slide">
+    <div class="card" style="width: 18rem;">
+        <img src="{{i.image.url}}" style="width: 286px; height:200px" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{i.name}}</h5>
+          <span><i style="color:green" class="fas fa-calendar"></i>{{i.create|jformat:' %d %B %Y '}}</span>&nbsp;
+          <span><i style="color:red" class="fas fa-eye"> </i> {{i.total_asli}}</span>
+<br><br>
+          <a href="{% url 'blog:detail' i.id%}" class="btn btn-primary">Go blog</a>
+        </div>
+      </div>
+</div>
+{% endfor %}
+
+</div>
+<div class="swiper-pagination"></div>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper(".mySwiper", {
+slidesPerView: 3,
+spaceBetween: 30,
+pagination: {
+el: ".swiper-pagination",
+clickable: true,
+},
+});
+</script>
+</div>
+<br> 
+<style>
+    h1{
+    text-align:center;
+    margin-bottom:50px;
+    margin-top:50px;
+  }
+  a {
+    font-family: Roboto;
+   }
+  .blog-card-blog {
+      margin-top: 30px;
+  }
+  .blog-card {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      margin-bottom: 30px;
+      border-radius: 6px;
+      color: rgba(0, 0, 0, 0.87);
+      background: #fff;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  }
+  .blog-card .blog-card-image {
+      height: 60%;
+      position: relative;
+      overflow: hidden;
+      margin-left: 15px;
+      margin-right: 15px;
+      margin-top: -30px;
+      border-radius: 6px;
+      box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  }
+  .blog-card .blog-card-image img {
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      pointer-events: none;
+  }
+  .blog-card .blog-table {
+      padding: 15px 30px;
+  }
+  .blog-table {
+      margin-bottom: 0px;
+  }
+  .blog-category {
+      position: relative;
+      line-height: 0;
+      margin: 15px 0;
+  }
+  .blog-text-success {
+      color: #28a745!important;
+  }
+  .blog-card-blog .blog-card-caption {
+      margin-top: 5px;
+  }
+  .blog-card-caption {
+      font-weight: 700;
+      font-family: "Roboto Slab", "Times New Roman", serif;
+  }
+  .fa {
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+  }
+  .blog-card-caption, .blog-card-caption a {
+      color: #333;
+      text-decoration: none;
+  }
+  
+  p {
+      color: #3C4857;
+  }
+  
+  p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+  }
+  .blog-card .ftr {
+      margin-top: 15px;
+  }
+  .blog-card .ftr .author {
+      color: #888;
+  }
+  
+  .blog-card .ftr div {
+      display: inline-block;
+  }
+  .blog-card .author .avatar {
+      width: 36px;
+      height: 36px;
+      overflow: hidden;
+      border-radius: 50%;
+      margin-right: 5px;
+  }
+  .blog-card .ftr .stats {
+    position: relative;
+    top: 1px;
+    font-size: 14px;
+}
+  .blog-card .ftr .stats {
+      float: right;
+      line-height: 30px;
+  }
+</style>
+    
+{% endblock body %}
+    

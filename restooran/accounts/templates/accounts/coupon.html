@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load jformat %}
+
+{% block body %}
+<div style="margin-top:10px;" class="container">
+
+    <div class="row">
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">code</th>
+                <th scope="col">start</th>
+                <th scope="col">end</th>
+                <th scope="col">mojoode</th>
+                <th scope="col">darsad</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for c in coupon %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td> {{c.code}}</td>
+                    <td>{{c.start|jformat:' %d %B  %H:%M'}}</td>
+                    <td>{{c.end|jformat:' %d %B  %H:%M'}}</td>
+                    <td>
+                       
+                       {% if c.active == True %}
+                            +
+                        {% else %}
+                            -
+                       {% endif %}
+                         
+                    </td>
+                    <td>{{c.discount}}</td>
+                    
+                </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+{% endblock body %}
+    

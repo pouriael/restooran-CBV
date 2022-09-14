@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <h1> order </h1>
+        <h4>total price: {{order.get_price}}</h4>
+
+        <p> user: {{order.user}}</p>
+        <p> first_name: {{order.f_name}}</p>
+        <p> last_name: {{order.l_name}}</p>
+        <p> email: {{order.email}}</p>
+        <p> address: {{order.address}}</p>
+        <p> noe ersal: {{order.ersal}}</p>
+        <p> information: {{order.information}}</p>
+
+
+        <form method="post" action="{% url 'order:coupon' order.id %}">
+            {% csrf_token %}
+            <input type="text" name="code" maxlength="200" required="" placeholder="enter your code"  id="id_code">
+            <div style="display:inline ;">
+                <button type="submit" class="btn btn-info" style="height: 29px; padding:1.5px;" >coupon</button>
+            </div>
+            
+        </form>
+        <button type="submit" class="btn btn-danger" style="height: 29px; padding:1.5px;" >
+            <a style="text-decoration:none; color: cornsilk;" href="{% url 'order:request' order.id order.get_price %}"> pay </a></button>
+        
+    </div>
+{% endblock body %}

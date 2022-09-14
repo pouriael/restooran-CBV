@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block body %}
+    {% for i in shobe %}
+    <h3 style="color:#fff">{{i.name}}</h3>
+    <a href="{% url 'home:product_shobe' i.id %}">
+        <img src="{{i.image.url}}" alt="">
+    </a>
+    
+     
+    {% endfor %}
+{% endblock body %}
+    

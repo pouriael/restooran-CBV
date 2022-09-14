@@ -1,0 +1,6 @@
+.main{
+    background-color: #525252;
+    min-height:100vh;
+    display:flex;
+    flex-direction: column;
+}

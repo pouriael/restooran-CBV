@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'home/product.css'%}">
+{% endblock head %}
+
+{% block title%}
+    home
+{% endblock title%}
+
+{% block body%}
+    
+  
+<div class="container-fluid">
+    <div class="row">
+      
+        <div class="container">
+          <div class="row">
+            
+                
+                
+                
+                {% for product in products  %}
+                
+                <div style="padding-top:25px;"class="col-md-3 col-sm-6">
+  
+                    <div class="product-grid">
+                        <div class="product-image">
+                              
+                                <img class="pic-1" style="width:300px; height: 300px;"src="{{product.image.url}}">
+                              
+                                
+                                
+                            
+                            <ul class="social">
+                             
+                            </ul>
+                            
+                            {% if product.discount %}
+                            <span class="product-discount-label">{{product.discount}}%</span>
+                            {% endif %}
+                            
+                        </div>
+                       
+                        <div class="product-content">
+                          {% if product.status == "Size" %}
+                              <form action="" method="post">
+                                {% csrf_token%}
+                                {% for data in variant%} 
+                                    <input type="radio"  value="{{data.id}}" {% if data.id == variants.id %} checked {% endif %}
+                                    name="select" onchange="this.form.submit();">
+                                    <a href="" style="text-decoration:none" > {{data.size_variant}}</a>
+                                {% endfor%}
+                              </form>
+      
+                          {% endif %}
+                          
+                          <form method="post" action={% url "cart:add_cart" product.id %}>
+                            {% csrf_token %}
+                                 <input style="display:none" type="number" name="quantity" min="1" value="1"  
+                                    required oninvalid="setCustomValidity('had aksar meghdar {{product.amount}} ast')">
+                            <button type="submit"><i class="fas fa-plus"></i></button>
+                            
+                        </form>
+                        
+                       
+                      {% for i in cart %}
+                      {% if i.product.name == product.name %}
+                        {% if i.quantity > 0 %}
+                        {{i.quantity}}
+                        {% endif %}
+                        
+                      {% else %}
+                        
+                      {% endif %}
+                      {% if i.product.name == product.name %}
+                      {% if i.quantity > 0 %}
+                      <form method="post" action={% url "cart:del_cart" product.id %}>
+                        {% csrf_token %}
+                             <input style="display:none" type="number" name="quantity" min="1" value="1"  
+                                required oninvalid="setCustomValidity('had aksar meghdar {{product.amount}} ast')">
+                        <button type="submit"><i class="fas fa-minus"></i></button>
+                        
+                    </form>
+                        {% endif %}
+                      
+                      {% endif %}
+                        
+                      {% endfor %}
+                        
+                          
+                     
+                        
+                              <p>{{product.name}}</p>
+                              
+                              {% if product.discount %}
+                                <div style="padding:15px;" class="price"><h6 style="display:inline;">Price:</h6> <p style="display:inline;font-weight: bold;font-size:15px;color: darkgreen;">{{product.total_price}}</p>
+                                  <span style="color:darkred;font-size:10px;font-weight:bold">{{product.unit_price}}</span>
+                                </div>
+                              {% else %}
+                                <div style="padding:15px;" class="price"><h6 style="display:inline;">Price:</h6> <p style="display:inline;font-weight: bold;font-size:15px;color: darkgreen;">{{product.total_price}}</p> </div>
+                              {% endif %}
+
+                            
+                        </div>
+                    </div>
+                </div>
+                
+               
+                
+                  
+            
+             <br>
+            {% endfor %}
+           
+             <br>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+    
+    <style>
+      .multi-range, .multi-range * { box-sizing: border-box; padding: 0; margin: 0; }
+.multi-range { 
+    position: relative; width: 160px; height: 28px; margin: 16px;
+    border: 1px solid #ddd; font-family: monospace;
+}
+.multi-range > hr { position: absolute; width: 100%; top: 50%; }
+.multi-range > input[type=range] {
+    width: calc(100% - 16px); 
+    position: absolute; bottom: 6px; left: 0;
+}
+.multi-range > input[type=range]:last-of-type { margin-left: 16px; }
+.multi-range > input[type=range]::-webkit-slider-thumb { transform: translateY(-18px); }
+.multi-range > input[type=range]::-webkit-slider-runnable-track { -webkit-appearance: none; height: 0px; }
+.multi-range > input[type=range]::-moz-range-thumb { transform: translateY(-18px); }
+.multi-range > input[type=range]::-moz-range-track { -webkit-appearance: none; height: 0px; }
+.multi-range > input[type=range]::-ms-thumb { transform: translateY(-18px); }
+.multi-range > input[type=range]::-ms-track { -webkit-appearance: none; height: 0px; }
+.multi-range::after { 
+    content: attr(data-lbound) ' - ' attr(data-ubound); 
+    position: absolute; top: 0; left: 100%; white-space: nowrap;
+    display: block; padding: 0px 4px; margin: -1px 2px;
+    height: 26px; width: auto; border: 1px solid #ddd; 
+    font-size: 13px; line-height: 26px;
+}
+
+    </style>
+{% endblock body%}
+

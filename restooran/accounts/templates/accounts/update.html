@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title%} update {% endblock title%}
+
+{% block body %} 
+<h1>update page</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div style="border-radius: 5px; width: 350px;margin-left: 500px ; margin-top:20px;margin-bottom: 100px;background-color: dimgrey;padding:30px" class="form">
+             <form method='post' novalidate> 
+            {% csrf_token %}
+        
+            <input style="margin-left:45px;border-radius:5px; background-color:burlywood; padding:3px" type="email" name="email" placeholder="enter email" value="{{user.email}}" maxlength="254" id="id_email"> <br><br>
+            <input style="margin-left:45px;border-radius:5px; background-color:burlywood; padding:3px" type="text" name="first_name" placeholder="enter firstname" value="{{user.first_name}}" maxlength="150" id="id_first_name"><br><br>
+            <input style="margin-left:45px;border-radius:5px; background-color:burlywood; padding:3px" type="text" name="last_name" value="{{user.last_name}}" placeholder="enter lastname" maxlength="150" id="id_last_name"><br><br>
+            <input style="margin-left:45px;border-radius:5px; background-color:burlywood; padding:3px" type="text" name="phone_0" value="{{Profile.phone}}" placeholder="enter phone" size="13" id="id_phone_0"><br><br>
+            <textarea style="height:100px;margin-left:45px;border-radius:5px; background-color:burlywood; padding:3px" type="text" name="address" placeholder="enter address: {{Profile.address}}" maxlength="50" id="id_address">{{Profile.address}}</textarea><br><br>
+            <span style="margin-left:65px;"> remove picture?</span>
+            <input style="margin-right:65px;border-radius:5px; background-color:burlywood; padding:3px" type="checkbox" name="profile_image-clear" id="profile_image-clear_id"><br><br>
+            <input style="border-radius:5px; background-color:burlywood; padding:3px" type="file" name="profile_image" accept="image/*" id="id_profile_image"><br><br>
+            <button type="submit" class="btn btn-danger" style="height: 29px; padding:1.5px;" > update</button>
+                </div>
+        
+    </form>
+
+
+{% endblock body %}
+
